@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CEEF92D2-7552-4EF7-8DAE-8CF0A02AC892}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SMS2WS_SyncAgent</RootNamespace>
+    <AssemblyName>SMS2WS_SyncAgent</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\DBXP\Applications\SMS2WS_SyncAgent\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>F8D838D63266608AC0E39CB7AEBC54C844647C6E</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>SMS2WS_SyncAgent_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SMS2WS_SyncAgent.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fluency">
+      <HintPath>packages\Fluency.1.0.45\lib\net40\Fluency.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\ANIMATO DB\WebScraper\WebScraper\bin\Debug\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>C:\Program Files (x86)\Log4Net\bin\net\4.0\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>C:\Program Files (x86)\TestDriven.NET 3\NUnit\2.6\framework\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnonymousAuthorBuilder.cs" />
+    <Compile Include="AnonymousBindingBuilder.cs" />
+    <Compile Include="AnonymousCustomerBuilder.cs" />
+    <Compile Include="AnonymousInstrumentBuilder.cs" />
+    <Compile Include="AnonymousManufacturerBuilder.cs" />
+    <Compile Include="AnonymousProductBuilder.cs" />
+    <Compile Include="AnonymousProductCategoryBuilder.cs" />
+    <Compile Include="AnonymousProductSeriesBuilder.cs" />
+    <Compile Include="AnonymousSongBuilder.cs" />
+    <Compile Include="AnonymousSupplierBuilder.cs" />
+    <Compile Include="AppEngine.cs" />
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="Author.cs" />
+    <Compile Include="AuthorRepository.cs" />
+    <Compile Include="Binding.cs" />
+    <Compile Include="BindingRepository.cs" />
+    <Compile Include="CommandLineArguments.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="CountryRepository.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="CustomerRepository.cs" />
+    <Compile Include="DAL.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Ftp.cs" />
+    <Compile Include="Instrument.cs" />
+    <Compile Include="InstrumentRepository.cs" />
+    <Compile Include="Log4NetWrapper.cs" />
+    <Compile Include="Manufacturer.cs" />
+    <Compile Include="ManufacturerRepository.cs" />
+    <Compile Include="MyGlobals.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderRepository.cs" />
+    <Compile Include="PredefinedDataObjects.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductCategory.cs" />
+    <Compile Include="ProductCategoryRepository.cs" />
+    <Compile Include="ProductLogBits.cs" />
+    <Compile Include="ProductPicture.cs" />
+    <Compile Include="ProductRepository.cs" />
+    <Compile Include="ProductSeries.cs" />
+    <Compile Include="ProductSeriesRepository.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SyncObject.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Song.cs" />
+    <Compile Include="Supplier.cs" />
+    <Compile Include="SupplierRepository.cs" />
+    <Compile Include="SyncSessionLogger.cs" />
+    <Compile Include="Tests\Test_CustomerRepository.cs" />
+    <Compile Include="Tests\Test_Ftp.cs" />
+    <Compile Include="Tests\Test_Utility.cs" />
+    <Compile Include="Tests\Test_WebMethods_Author.cs" />
+    <Compile Include="Tests\Test_WebMethods_Binding.cs" />
+    <Compile Include="Tests\Test_WebMethods_Country.cs" />
+    <Compile Include="Tests\Test_WebMethods_Customer.cs" />
+    <Compile Include="Tests\Test_WebMethods_Instrument.cs" />
+    <Compile Include="Tests\Test_WebMethods_Manufacturer.cs" />
+    <Compile Include="Tests\Test_WebMethods_Product.cs" />
+    <Compile Include="Tests\Test_WebMethods_ProductCategory.cs" />
+    <Compile Include="Tests\Test_WebMethods_ProductSeries.cs" />
+    <Compile Include="Tests\Test_WebMethods_Supplier.cs" />
+    <Compile Include="Tests\Test_WebMethods_Utility.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="WebMethods.cs" />
+    <Compile Include="WebMethods_Author.cs" />
+    <Compile Include="WebMethods_Binding.cs" />
+    <Compile Include="WebMethods_Country.cs" />
+    <Compile Include="WebMethods_Customer.cs" />
+    <Compile Include="WebMethods_Instrument.cs" />
+    <Compile Include="WebMethods_Manufacturer.cs" />
+    <Compile Include="WebMethods_Order.cs" />
+    <Compile Include="WebMethods_Product.cs" />
+    <Compile Include="WebMethods_ProductCategory.cs" />
+    <Compile Include="WebMethods_ProductSeries.cs" />
+    <Compile Include="WebMethods_Supplier.cs" />
+    <Compile Include="WebMethods_Utilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\test_product_picture.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SMS2WS_SyncAgent.ico" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Resources\Customer.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Product.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ProductCategory.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Supplier.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Author.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Manufacturer.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Instrument.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Binding.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ProductSeries.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Country.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\testcategory.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

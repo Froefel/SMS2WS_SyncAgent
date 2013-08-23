@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="customer">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="id" minOccurs="0" />
+        <xs:element name="store_id" minOccurs="0" />
+        <xs:element name="last_name" minOccurs="0" />
+        <xs:element name="first_name" minOccurs="0" />
+        <xs:element name="email" minOccurs="0" />
+        <xs:element name="force_reset_pass" minOccurs="0" />
+        <xs:element name="teacher_confirmed" minOccurs="0" />
+        <xs:element name="institution" minOccurs="0" />
+        <xs:element name="teaching_subjects" minOccurs="0" />
+        <xs:element name="card_number" minOccurs="0" />
+        <xs:element name="card_valid_from" minOccurs="0" />
+        <xs:element name="card_valid_to" minOccurs="0" />
+        <xs:element name="teacher_registration_note" minOccurs="0" />
+        <xs:element name="is_teacher" minOccurs="0" />
+        <xs:element name="is_reseller" minOccurs="0" />
+        <xs:element name="std_discount_for_tax_rate_id1" minOccurs="0" />
+        <xs:element name="std_discount_for_tax_rate_id2" minOccurs="0" />
+        <xs:element name="last_login" minOccurs="0" />
+        <xs:element name="created" minOccurs="0" />
+        <xs:element name="updated" minOccurs="0" />
+        <xs:element name="deleted" minOccurs="0" />
+        <xs:element name="shipping_address_street" minOccurs="0" />
+        <xs:element name="shipping_address_home_number" minOccurs="0" />
+        <xs:element name="shipping_address_zip" minOccurs="0" />
+        <xs:element name="shipping_address_city" minOccurs="0" />
+        <xs:element name="shipping_address_country_id" minOccurs="0" />
+        <xs:element name="shipping_address_state_id" minOccurs="0" />
+        <xs:element name="shipping_address_country_name" minOccurs="0" />
+        <xs:element name="shipping_address_state_name" minOccurs="0" />
+        <xs:element name="phone" minOccurs="0" />
+        <xs:element name="mobile" minOccurs="0" />
+        <xs:element name="billing_name" minOccurs="0" />
+        <xs:element name="billing_contact" minOccurs="0" />
+        <xs:element name="billing_address1" minOccurs="0" />
+        <xs:element name="billing_address2" minOccurs="0" />
+        <xs:element name="billing_address3" minOccurs="0" />
+        <xs:element name="vat_number" minOccurs="0" />
+        <xs:element name="test" minOccurs="0" />
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="product">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="id" minOccurs="1" />
+        <xs:element name="product_type_id" minOccurs="0" />
+        <xs:element name="author_id" minOccurs="0" />
+        <xs:element name="arranger_id" minOccurs="0" />
+        <xs:element name="manufacturer_id" minOccurs="0" />
+        <xs:element name="supplier_id" minOccurs="0" />
+        <xs:element name="instrument_id" minOccurs="0" />
+        <xs:element name="available" minOccurs="0" />
+        <xs:element name="name_nl" minOccurs="0" />
+        <xs:element name="name_en" minOccurs="0" />
+        <xs:element name="subtitle_nl" minOccurs="0" />
+        <xs:element name="description_nl" minOccurs="0" />
+        <xs:element name="title_tag_nl" minOccurs="0" />
+        <xs:element name="meta_description_nl" minOccurs="0" />
+        <xs:element name="meta_keywords_nl" minOccurs="0" />
+        <xs:element name="ru_name_nl" minOccurs="0" />
+        <xs:element name="sell_price" minOccurs="0" />
+        <xs:element name="reference" minOccurs="0" />
+        <xs:element name="isbn" minOccurs="0" />
+        <xs:element name="ismn" minOccurs="0" />
+        <xs:element name="ean" minOccurs="0" />
+        <xs:element name="upc" minOccurs="0" />
+        <xs:element name="language_id" minOccurs="0" />
+        <xs:element name="binding_id" minOccurs="0" />
+        <xs:element name="grade_level" minOccurs="0" />
+        <xs:element name="product_series_id" minOccurs="0" />
+        <xs:element name="tax_rate_id" minOccurs="0" />
+        <xs:element name="nr_of_pages" minOccurs="0" />
+        <xs:element name="weight" minOccurs="0" />
+        <xs:element name="length" minOccurs="0" />
+        <xs:element name="width" minOccurs="0" />
+        <xs:element name="height" minOccurs="0" />
+        <xs:element name="internal_stock_qty" minOccurs="0" />
+        <xs:element name="external_stock_qty" minOccurs="0" />
+        <xs:element name="promotion" minOccurs="0" />
+        <xs:element name="highlight_on_home" minOccurs="0" />
+        <xs:element name="bestseller" minOccurs="0" />
+        <xs:element name="search_keywords" minOccurs="0" />
+        <xs:element name="teacher_discount" minOccurs="0" />
+        <xs:element name="reseller_discount" minOccurs="0" />
+        <xs:element name="minimum_order_qty" minOccurs="0" />
+        <xs:element name="store_pickup_only" minOccurs="0" />
+        <xs:element name="test" minOccurs="0" />
+        <xs:element name="created" minOccurs="0" />
+        <xs:element name="updated" minOccurs="0" />
+        <xs:element name="deleted" minOccurs="0" />
+        <xs:element name="songs" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="song" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="id" minOccurs="1" />
+                    <xs:element name="sort_order" minOccurs="0" />
+                    <xs:element name="title" minOccurs="0" />
+                    <xs:element name="author_id" minOccurs="0" />
+                    <xs:element name="test" minOccurs="0" />
+                    <xs:element name="created" minOccurs="0" />
+                    <xs:element name="deleted" minOccurs="0" />
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="product_categories" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="product_category" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="id" minOccurs="1" />
+                    <xs:element name="test" minOccurs="0" />
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="product_pictures" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="product_picture" minOccurs="0" maxOccurs="unbounded" >
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="picture_file_name" minOccurs="1" />
+                    <xs:element name="test" minOccurs="0" />
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

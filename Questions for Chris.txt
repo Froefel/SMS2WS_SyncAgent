@@ -1,0 +1,47 @@
+Questions for Chris on SMS2WS_SyncAgent
+=======================================
+1. WebMethods class and all its methods as abstract OK?
+
+2. How should I implement Error Handling?
+
+3. How should I handle the DateTime property if I want it to be able to output null or empty string in the Xml?
+
+4. Factory classes as internal static?
+=> OK, but rename to Repository
+
+5. Error messages: Methods that return an object can also return an error string. Should this be handled via an output parameter or via Exception Handling? Example: GetProductById()
+==> Use Excepton Handling
+
+6. Breakdown of class WebMethods with nested classes in order to get WebMethods.ProductMethods, WebMethods.CustomerMethods etc. Is this approach OK or is there a better way? Should I use partial classes?
+=> Use wrapper class with methods that return a reference to the specific classes
+
+7. How do I get started with GitHub?
+
+
+TEST Questions
+--------------
+1. Recommendations for naming convention of tests.
+=> OK
+
+2. How should I handle test data? For instance UpdateCustomer creates a new customer, but DeleteCustomer only sets a deleted timestamp. 
+   Result: after many tests I end up with lots of unneeded customers marked as deleted.
+   Q: should the DB have special provision for test objects?
+   Q: should the DB contain special test objects guaranteed to exist for testing purposes?
+=> Get Fluency library from newGit
+   
+3. Is it OK to have several Assert statements in a single test?
+=> Yes
+
+4. Test UpdateProductCategory_creates_new_category_and_returns_ok() fails with nCrunch on a line that is not actually failing when run. How come?
+=> Fixed, had to specify "Copy always" for the picture file properties.
+
+
+Use Auto properties
+Consider NewtonSoft.Json instead of XML
+Content Type of API return should be "xml"
+Evaluate REST for http interaction
+Check out AutoMapper to copy one object to another
+Check out https://github.com/ChrisEdwards/Shiloh.Testing for object camparison
+
+=> Roll my own ARandom as a static class, implementing all functions of the existing ARandom and simply returning ARandom.Func
+=> Extend ARandom with methods to generate produdtIDs, EANs, ISBNs, ISMNs, UPCs, etc.

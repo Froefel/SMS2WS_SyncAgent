@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="product_category">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="id" minOccurs="1" />
+        <xs:element name="name_nl" minOccurs="0" />
+        <xs:element name="parent_id" minOccurs="0" />
+        <xs:element name="picture_file_name" minOccurs="0" />
+        <xs:element name="sort_order" minOccurs="0" />
+        <xs:element name="product_count" minOccurs="0" />
+        <xs:element name="target_url" minOccurs="0" />
+        <xs:element name="test" minOccurs="0" />
+        <xs:element name="created" minOccurs="0" />
+        <xs:element name="updated" minOccurs="0" />
+        <xs:element name="deleted" minOccurs="0" />
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

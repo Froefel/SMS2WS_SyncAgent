@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<customer>
+  <id>1797</id>
+  <store_id>27193</store_id>
+  <last_name>De Schryver</last_name>
+  <first_name>Hans</first_name>
+  <email>hansdeschryver@gmail.com</email>
+  <language_id>4</language_id>
+  <force_reset_pass>0</force_reset_pass>
+  <is_teacher>0</is_teacher>
+  <teacher_confirmed></teacher_confirmed>
+  <institution></institution>
+  <teaching_subjects></teaching_subjects>
+  <card_number></card_number>
+  <card_valid_from></card_valid_from>
+  <card_valid_to></card_valid_to>
+  <teacher_registration_note></teacher_registration_note>
+  <is_reseller>0</is_reseller>
+  <std_discount_for_tax_rate_id1>0</std_discount_for_tax_rate_id1>
+  <std_discount_for_tax_rate_id2>0</std_discount_for_tax_rate_id2>
+  <last_login></last_login>
+  <created>2012-12-14 02:45:44</created>
+  <updated></updated>
+  <deleted></deleted>
+  <active>1</active>
+  <customer_id>1797</customer_id>
+  <shipping_address_street></shipping_address_street>
+  <shipping_address_home_number></shipping_address_home_number>
+  <shipping_address_zip></shipping_address_zip>
+  <shipping_address_city></shipping_address_city>
+  <shipping_address_country_id>21</shipping_address_country_id>
+  <shipping_address_state_id></shipping_address_state_id>
+  <phone></phone>
+  <mobile>0498/51 38 23</mobile>
+  <billing_name></billing_name>
+  <billing_contact></billing_contact>
+  <billing_address1></billing_address1>
+  <billing_address2></billing_address2>
+  <billing_address3></billing_address3>
+  <vat_number></vat_number>
+  <shipping_address_country_name>Belgium</shipping_address_country_name>
+  <shipping_address_state_name></shipping_address_state_name>
+</customer>

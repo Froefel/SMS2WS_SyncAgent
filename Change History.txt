@@ -1,0 +1,74 @@
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4983.1417 on 2013/08/22 (Production version, deployed on server)
+#130822_02 - added functionality to log session results to table [SyncAgentSessionResults]
+#130822_01 - added automatic retry (5 times with 500ms interval) when checking Internet connection
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4960.20056 on 2013/07/31 (Production version, deployed on server)
+#130731_01 - changed StdDiscount6 to WebshopDiscount6 and changed associated field in SMS to WebshopDiscount_6
+		   - changed StdDiscount21 to WebshopDiscount21 and changed associated field in SMS to WebshopDiscount_21
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4938.26194 on 2013/07/04 (Production version, deployed on server)
+#130709_02 - added using statement around Internet connection check, so HttpWebResponse object is returned to the connection pool when done.
+			 This should fix the "No internet connection" problem.
+#130709_01 - added try/catch around call to engine.Main() so database connection is no longer cause for fatal error
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4933.31953 on 2013/07/04 (Production version, deployed on server)
+#130704_04 - added Customer.ConfirmSendTeacherConfirmedEmail()
+		   - added CustomerRepository.ConfirmSendTeacherConfirmedEmail()
+		   - updated CustomerRepository.UpdateCustomer() to update the customer.StoreId for customers that were created in the webshop. 
+		     This fixes another error where the call to SetSyncStatus failed when customer.StoreId was empty
+#130704_03 - corrected error message for products, which erroneously mentioned prouct category
+#130704_02 - replaced all occurrences of exception.Message with exception.ToString() in order to report more detailsm inclusing the inner exception
+#130704_01 - moved UpdatePresence() to Program.cs
+		   - added message parameter to UpdatePresence()
+		   - added extra calls to UpdatePresence to report more accurate and detailed status to the SMS
+#130703_03 - Tests: re-enabled the Assertion of created, updated and deleted fields
+#130703_02 - WebMethods.PreprocessWebMethodResult(): removed a few extra checks for invalid return data. Meanwhile this invalid return data should be no longer accepted.
+#130703_01 - AppSettings.cs: added various properties and a constructor that retrieves configuration settings from the .config file
+		   - replaced various hard-coded values with properties of the AppSettings class
+#130702_02 - added error logging for Utility.IsConnectedToInternet()
+		   - added Test_Utility.cs
+#130702_01 - GetProductCategoryChangesByTimestamp(): added criteria to exclude "[ Nieuwe categorie ]" from updates and deletes
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4929.31621 on 2013/06/31 (Production version, deployed on server)
+#130631_01 - added #if DEBUG #endif block around all tests, so they are excluded in the Release build
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4907.30218 on 2013/06/08 (Development version, sent to Marc)
+#130602_01 - added extra try/catch block around all sql statements such that failing sql statements can be logged
+		   - added extension method ToStringExtended() for OleDbCommand object
+#130601_01 - added functionality such that the application writes an update status to the Settings_Shared table every time an action is completed
+#130531_01 - added support for store_pickup_only
+		   - added store_pickup_only to product.xsd definition
+		   - added support for WebshopTeacherDiscount and WebshopResellerDiscount, mapped to teacher_discount and reseller_discount
+		   - fixed bug: search_keywords was not being read from xml intput or written to xml output
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4868.25155 on 2013/05/19 (Development version, sent to Marc)
+#130506_01 - removed keywords_nl from Products.xsd
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4846.2948 on 2013/04/08 (Development version, sent to Marc)
+#130407_01 - added support for product.name_nl
+#130402_01 - added support for a P keystroke to pause the application. A visual timer shows the amount of time the application has been paused
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4830.42575 on 2013/03/24 (Development version, sent to Marc)
+#130323_02 - added SmtpAppender to log4net, so Errors are emailed
+#130323_01 - ProductRepository.cs.LoadProductListFromDataReader(): fixed cast for LanguageID value
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4829.4285 on 2013/03/22 (Development version, sent to Marc)
+#130321_01 - AppEngine.cs: refactored SynchronizeData() such that action types have their own method
+#130316_01 - Program.cs.Main(): added functionality to check for a valid Internet connection before starting a sync session
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4823.31379 on 2013/03/15 (Development version, sent to Marc)
+#130315_02 - Added application icon
+#130315_01 - Changed business logic such that parameters are read and stored in the app.config file
+		   - Changed business logic such that all command-line parameters are optional. If specified they override the app.config values

@@ -1,0 +1,1034 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fluency</name>
+    </assembly>
+    <members>
+        <member name="T:Fluency.Conventions.Convention">
+            <summary>
+            Collection of static factory methods to create conventions to automatically assign a default value to a property.
+            </summary>
+        </member>
+        <member name="M:Fluency.Conventions.Convention.ByName``1(System.String,System.Func{System.Reflection.PropertyInfo,``0})">
+            <summary>
+            Creates a convention that is applied to properties that match the specified property name and type. <br/>
+            When applied, the convention will assign the specified value as the property's default value when the builder is first created.
+            </summary>
+            <typeparam name="T">The type of property to mactch on.</typeparam>
+            <param name="propertyName">The property name to match on.</param>
+            <param name="defaultValue">The default value to provide when the property name matches.</param>
+            <returns>The constructed <see cref="T:Fluency.Conventions.IDefaultConvention`1"/></returns>
+        </member>
+        <member name="M:Fluency.Conventions.Convention.ByType``1(System.Func{System.Reflection.PropertyInfo,``0})">
+            <summary>
+            Creates a convention that assigns the specified value as the default value for any property having a datatype that matches the specified type. <br/>
+            When applied, the convention will assign the specified value as the property's default value when the builder is first created.
+            </summary>
+            <typeparam name="T">The type of property to match on.</typeparam>
+            <param name="defaultValue">The default value to provide for matching properties.</param>
+            <returns>The constructed <see cref="T:Fluency.Conventions.IDefaultConvention`1"/></returns>
+        </member>
+        <member name="M:Fluency.Conventions.Convention.FirstName">
+            <summary>
+            Creates a convention to automatically assign a default value to a property:<br/>
+            Assign a random first name when the property name contains "firstname" (case-insensitive)
+            </summary>
+            <returns>The constructed <see cref="T:Fluency.Conventions.IDefaultConvention`1"/></returns>
+        </member>
+        <member name="M:Fluency.Conventions.Convention.String(System.Int32)">
+            <summary>
+            Creates a convention to automatically assign a default value to a property:<br/>
+            Assign a random <see cref="T:System.String"/> (of a specifed length) when the property is a <see cref="T:System.String"/>.
+            </summary>
+            <param name="length">The length of the string to create for the default value.</param>
+            <returns>The constructed <see cref="T:Fluency.Conventions.IDefaultConvention`1"/></returns>
+        </member>
+        <member name="M:Fluency.Conventions.Convention.LastName">
+            <summary>
+            Creates a convention to automatically assign a default value to a property:<br/>
+            Assign a random last name as when the property name contains "lastname" (case-insensitive).
+            </summary>
+            <returns>The constructed <see cref="T:Fluency.Conventions.IDefaultConvention`1"/></returns>
+        </member>
+        <member name="M:Fluency.Conventions.Convention.DateType">
+            <summary>
+            Creates a convention to automatically assign a default value to a property:<br/>
+            Assign a random <see cref="T:System.DateTime"/> (with time component set to midnight) when the property type is <see cref="T:System.DateTime"/>.
+            </summary>
+            <returns>The constructed <see cref="T:Fluency.Conventions.IDefaultConvention`1"/></returns>
+        </member>
+        <member name="M:Fluency.Conventions.Convention.IntegerType">
+            <summary>
+            Creates a convention to automatically assign a default value to a property:<br/>
+            Assign a random <see cref="T:System.Int32"/> when the property type is <see cref="T:System.Int32"/>.
+            </summary>
+            <returns>The constructed <see cref="T:Fluency.Conventions.IDefaultConvention`1"/></returns>
+        </member>
+        <member name="M:Fluency.Conventions.DefaultConvention`1.Fluency#Conventions#IDefaultConvention#DefaultValue(System.Reflection.PropertyInfo)">
+            <summary>
+            Gets the default value for the specirfied property.
+            </summary>
+            <param name="propertyInfo">The property info.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fluency.DataGeneration.ARandom">
+            <summary>
+            A random value generator.
+            </summary>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.String(System.Int32)">
+            <summary>
+            Returns a random <see cref="T:System.String"/> of all capital letters. The length of the string equals the specified <paramref name="size"/>.
+            </summary>
+            <param name="size">The size.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.StringFromCharacterSet(System.Int32,System.String)">
+            <summary>
+            Creates a random <see cref="T:System.String"/> constrained to characters in the specified <paramref name="charactersToChooseFrom"/>
+            whose length equals the specified <paramref name="size"/>.
+            </summary>
+            <param name="size">The size.</param>
+            <param name="charactersToChooseFrom">The characters to choose from.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.StringPattern(System.String)">
+            <summary>
+            Returns a <see cref="T:System.String"/> containing the <paramref name="pattern"/> after replacing 
+            any <c>'9'</c> or <c>'#'</c> characters with random digits.<br/>
+            Example:<br/>
+            <code>ARandom.StringPattern( "(999) 999-9999" ) =&gt; "(361) 735-8254"</code>
+            </summary>
+            <param name="pattern">The pattern.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.Text(System.Int32)">
+            <summary>
+            Returns a <see cref="T:System.String"/> containing randomly generated text, with a length less than or equal to 
+            the specified <paramref name="maxChars"/>.<br/>
+            The text looks real, but is actually gibberish. Similar to lorem ipsum. Uses the <see cref="T:Fluency.DataGeneration.WaffleEngine"/> to generate the text.
+            </summary>
+            <param name="maxChars">The max chars.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.Title(System.Int32)">
+            <summary>
+            Returns a random <see cref="T:System.String"/> containing a title of length less than or equal to the specified <paramref name="maxChars"/>.
+            </summary>
+            <param name="maxChars">The max chars.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.Int">
+            <summary>
+            Returns a random <see cref="!:integer"/> between 1 and 9999.
+            </summary>
+            <remarks>
+            I think this code was tampered with. I believe it used to include the full range of int 
+            including negative values. Not sure.
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.PositiveInt">
+            <summary>
+            Returns a random positive <see cref="!:integer"/> between 1 and 9999.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.IntBetween(System.Int32,System.Int32)">
+            <summary>
+            Returns a random <see cref="!:integer"/> between the specified <paramref name="min"/> and <paramref name="max"/> (inclusive).
+            </summary>
+            <param name="min">The min.</param>
+            <param name="max">The max.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.Double">
+            <summary>
+            Returns a random <see cref="T:System.Double"/> value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DoubleBetween(System.Double,System.Double)">
+            <summary>
+            Returns a random <see cref="T:System.Double"/> value between the specified <paramref name="min"/> and <paramref name="max"/> (inclusive).
+            </summary>
+            <param name="min">The min.</param>
+            <param name="max">The max.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.ItemFrom``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Returns an item of type <typeparamref name="T"/> chosen at random from the specified list of <paramref name="items"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="items">The items.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.ItemFrom``1(``0[])">
+            <summary>
+            Returns an item of type <typeparamref name="T"/> chosen at random from the specified array of <paramref name="items"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="items">The items.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.EnumValue``1">
+            <summary>
+            Returns a randomly selected enum value from the specified enum type <typeparamref name="TEnumType"/>.
+            </summary>
+            <typeparam name="TEnumType"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateTime">
+            <summary>
+            Returns a random <see cref="M:Fluency.DataGeneration.ARandom.DateTime"/>. <br/>
+            Note, this may return dates far into the future as well as far into the past.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateTimeBetween(System.DateTime,System.DateTime)">
+            <summary>
+            Returns a random <see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> between the specified <paramref name="min"/> and <paramref name="max"/> (inclusive).
+            </summary>
+            <param name="min">The min.</param>
+            <param name="max">The max.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateTimeBefore(System.DateTime)">
+            <summary>
+            Returns a random <see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> prior to the specified <paramref name="upperBounds"/>.
+            </summary>
+            <param name="upperBounds">The compare date time.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateTimeAfter(System.DateTime)">
+            <summary>
+            Returns a random <see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> greater than the specified <paramref name="lowerBounds"/>.
+            </summary>
+            <param name="lowerBounds">The compare date time.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateAfter(System.DateTime)">
+            <summary>
+            Returns a random  date (<see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> with no time data) greater than the specified <paramref name="lowerBounds"/>
+            </summary>
+            <param name="lowerBounds">The compare date time.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateInPastSince(System.DateTime)">
+            <summary>
+            Returns a random  date (<see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> with no time data) less than today, 
+            but greater than the specified <paramref name="lowerBounds"/>.
+            </summary>
+            <param name="lowerBounds">The start date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateTimeInPast">
+            <summary>
+            Returns a random <see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> less than now.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateInPast">
+            <summary>
+            Returns a random  date (<see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> with no time data) less than today.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateTimeInPastYear">
+            <summary>
+            Returns a random <see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> greater than one year ago, and less than now.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateInPastYear">
+            <summary>
+            Returns a random date (<see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> with no time data) greater than one year ago today,
+            and less than today.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateTimeInFuture">
+            <summary>
+            Returns a random <see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> greater than now.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateTimeInPastSince(System.DateTime)">
+            <summary>
+            Returns a random <see cref="M:Fluency.DataGeneration.ARandom.DateTime"/> greater than the specified <paramref name="lowerBounds"/>
+            and less than now.
+            </summary>
+            <param name="lowerBounds">The start date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.InterestRate">
+            <summary>
+            Returns a random interest rate (<see cref="T:System.Decimal"/>) between 0 and 10.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.CurrencyAmount">
+            <summary>
+            Returns a random currency amount (<see cref="T:System.Decimal"/>). <br/>
+            The value will be between zero and 999,999,999.00 (inclusive) with a precision of two decimal places.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.CurrencyAmountLessThan(System.Int32)">
+            <summary>
+            Returns a random currency amount (<see cref="T:System.Decimal"/>) that is less than or equal to 
+            the specified <paramref name="maxAmount"/>. <br/>
+            The value will be between zero and the specified <paramref name="maxAmount"/> (inclusive) 
+            with a precision of two decimal places.
+            </summary>
+            <param name="maxAmount">The max amount.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.CurrencyAmountBetween(System.Int32,System.Int32)">
+            <summary>
+            Returns a random currency amount (<see cref="T:System.Decimal"/>) that is greater than or equal to the 
+            specified <paramref name="minAmount"/> and less than or equal to  the specified 
+            <paramref name="maxAmount"/>. <br/>
+            The value will be between zero and the specified <paramref name="maxAmount"/> (inclusive) 
+            with a precision of two decimal places.
+            </summary>
+            <param name="minAmount">The min amount. </param>
+            <param name="maxAmount">The max amount.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.Boolean">
+            <summary>
+            Returns a random <see cref="M:Fluency.DataGeneration.ARandom.Boolean"/> value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.Email">
+            <summary>
+            Returns a <see cref="T:System.String"/> containing a random email address.<br/>
+            It is (10 random capital letters)@(10 random capital letters).(com, org, or net)<br/>
+            Example: <br/>
+            <code>"UDHGELEGAP@PTMWZJRKCD.com"</code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.FirstName">
+            <summary>
+            Returns a random first name.<br/>
+            Examples: <code>"Bob", "Judy", "Josephina"</code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.LastName">
+            <summary>
+            Returns a random last name.<br/>
+            Examples: <code>"Smith", "Olson", "Naranja"</code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.FullName">
+            <summary>
+            Returns a <see cref="T:System.String"/> containing a random full name. It is in the form of first name, followed by a space, then the last name.<br/>
+            Examples: <code>"Bob Smith", "Judith Werner"</code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.StateName">
+            <summary>
+            Returns the full name of a random US State.<br/>
+            Examples: <code>"Texas", "Ohio", "Alaska"</code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.StateCode">
+            <summary>
+            Returns a random 2-letter state code.<br/>
+            Examples: <code>"TX", "CA", "WA"</code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.City">
+            <summary>
+            Returns a random city name.<br/>
+            Examples: <code>"Sacramento", "New York", "Austin"</code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.BirthDate">
+            <summary>
+            Returns a random BirthDate (<see cref="M:Fluency.DataGeneration.ARandom.DateTime"/>) for a person aged anywhere between 5 and 75 years old.<br/>
+            Note: The returned value is a Date and does not include time information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.ZipCode">
+            <summary>
+            Returns a random 5-digit zip code.<br/>
+            Example: <code>"78234"</code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.Age">
+            <summary>
+            Generates a random age between 1 and 100.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.AdultAge">
+            <summary>
+            Generates a random adult age between 21 and 65 (inclusive).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.BirthDateForAge(System.Int32)">
+            <summary>
+            Generates a random birthdate  for a person of the specified <paramref name="age"/>.
+            </summary>
+            <param name="age">The age. (between 1 and 1000</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DataGeneration.ARandom.DateBetween(System.DateTime,System.DateTime)">
+            <summary>
+            Generates a random date (no time) between the specified <paramref name="startDate"/> and <paramref name="endDate"/> (inclusive).
+            </summary>
+            <param name="startDate">The start date.</param>
+            <param name="endDate">The end date.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fluency.DataGeneration.DefaultValues">
+            <summary>
+            Defines the current set of default values used for data.
+            </summary>
+            <remarks>
+            This is a static class because we need to ensure that the defaults and constraints used by the RandomGenerator
+            to create anonymous test data are the same defaults and constraints used by the DbHelper to insert those values
+            into the database. The main case for this is when a date value is supposed to be null, the min sql value is used (since
+            it cannot be null in memory). When inserting the data..if the value is the min value, a DBNull is actually inserted. 
+            The comparison against min value to determine if a DBNull should be inserted is the purpose for this class and the
+            DefaultConstraints class.
+            </remarks>
+        </member>
+        <member name="M:Fluency.DataGeneration.DefaultValues.Use(Fluency.DataGeneration.IDefaultValues)">
+            <summary>
+            Uses the specified default values for all subsequent calls to Get.
+            </summary>
+            <param name="defaultValues">The default values.</param>
+        </member>
+        <member name="P:Fluency.DataGeneration.DefaultValues.Get">
+            <summary>
+            Gets the current set of values to use as defaults.
+            </summary>
+            <value>The get.</value>
+        </member>
+        <member name="T:Fluency.DataGeneration.ValueConstraints">
+            <summary>
+            Defines the current set of value constraints (or range limits) for generating random data.
+            </summary>
+            <remarks>
+            This is a static class because we need to ensure that the defaults and constraints used by the RandomGenerator
+            to create anonymous test data are the same defaults and constraints used by the DbHelper to insert those values
+            into the database. The main case for this is when a date value is supposed to be null, the min sql value is used (since
+            it cannot be null in memory). When inserting the data..if the value is the min value, a DBNull is actually inserted. 
+            The comparison against min value to determine if a DBNull should be inserted is the purpose for this class and the
+            DefaultConstraints class.
+            </remarks>
+        </member>
+        <member name="F:Fluency.DataGeneration.ValueConstraints._currentValueConstraints">
+            <summary>
+            Sql Server's minimum date value is 1/1/1753 12:00:00 AM. DateTime.MinValue is much less than this number. 
+            The RandomGenerator uses these constraints to generate data that we will insert into a Sql database, we 
+            need to default to enforce Sql limits or we risk throwing an error by inserting an invalid date time value.
+            </summary>
+        </member>
+        <member name="M:Fluency.DataGeneration.ValueConstraints.Use(Fluency.DataGeneration.IValueConstraints)">
+            <summary>
+            Uses the specified ValueConstraints for all subsequent calls to Get.
+            </summary>
+            <param name="valueConstraints">The value constraints.</param>
+        </member>
+        <member name="P:Fluency.DataGeneration.ValueConstraints.Get">
+            <summary>
+            Gets the current set of ValueConstraints to use in creating random data.
+            </summary>
+            <value>The get.</value>
+        </member>
+        <member name="T:Fluency.DynamicFluentBuilder`1">
+            <summary>
+            Extends the <see cref="T:Fluency.FluentBuilder`1"/> class to add dynamic property setters using lambda expressions. <br/>
+            For example: <code>builder.With( x =&gt; x.MyProperty, "value" );</code><br/>
+            When no custom behaviour is needed, an instance of <see cref="T:Fluency.DynamicFluentBuilder`1"/> can be used rather than creating a custom subclass of <see cref="T:Fluency.FluentBuilder`1"/>
+            </summary>
+            <typeparam name="T">The type of object to build</typeparam>
+        </member>
+        <member name="T:Fluency.FluentBuilder`1">
+            <summary>
+            Exposes a fluent interface to build Fluent objects.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Fluency.IFluentBuilder">
+            <summary>
+            Marker interface.
+            </summary>
+        </member>
+        <member name="M:Fluency.IFluentBuilder`1.build">
+            <summary>
+            Builds this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fluency.FluentBuilder`1"/> class.
+            </summary>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.build">
+            <summary>
+            Either returns the override result, or builds this object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.SetupDefaultValues">
+            <summary>
+            Allows the builder to specify default values for fields in the object.
+            </summary>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.BeforeBuilding">
+            <summary>
+            Event that fires after the object is built to allow the builder to do post-processing.
+            </summary>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.AfterBuilding(`0)">
+            <summary>
+            Event that fires after the object is built to allow the builder to do post-processing.
+            </summary>
+            <param name="buildResult">The build result.</param>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.BuildFrom(`0)">
+            <summary>
+            Builds an object of type T based on the specs specified in the builder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.GetValue``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Gets the value the builder will create for the specified property.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.SetProperty``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},``0)">
+            <summary>
+            Sets the value to be built for the specified property.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <param name="propertyValue">The property value.</param>
+            <exception cref="T:Fluency.FluencyException">Cannot set property once a pre built result has been given. Property change will have no affect.</exception>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.SetProperty``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},Fluency.IFluentBuilder)">
+            <summary>
+            Sets the builder to be used to construct the value for the specified propety.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.SetList``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},Fluency.IFluentBuilder)">
+            <summary>
+            Sets the list builder for the specified property. Use this to assign a <see cref="!:FluentBuilder&lt;IList&lt;TPropertyType&gt;&gt;"/> to build the list for the property whose type is IList{PropertyType}.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <param name="builder">The builder.</param>
+            <exception cref="T:System.ArgumentException">Invalid builder type. Builder type must be a FluentListBuilder of the Property Type</exception>
+            <exception cref="T:System.ArgumentException">PropertyType must derive from IList</exception>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.AddListItem``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}},Fluency.IFluentBuilder{``0})">
+            <summary>
+            Adds a new builder to a list of builders for the specified list property.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.AddListItem``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}},``0)">
+            <summary>
+            Adds a new value to the list of values to be built for the specified list property.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.AddToList``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}},Fluency.IFluentBuilder{``0}[])">
+            <summary>
+            Adds a new builder to a list of builders for the specified list property.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.AddToList``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}},``0[])">
+            <summary>
+            Adds a one or more values to the list of values to be built for the specified list property.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <param name="values">The value or values to add to the list.</param>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.RemoveBuilderFor(System.Reflection.PropertyInfo)">
+            <summary>
+            Removes the builder for the specified property if it exists.
+            </summary>
+            <param name="property">The property.</param>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.AddBuilderFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},Fluency.IFluentBuilder)">
+            <summary>
+            Adds the specified builder for the specified property...removing any builder that may have already been assigend.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.AddBuilderFor(System.Reflection.PropertyInfo,Fluency.IFluentBuilder)">
+            <summary>
+            Adds the specified builder for the specified property...removing any builder that may have already been assigend.
+            </summary>
+            <param name="property">The property.</param>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.ListBuilderFor``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}})">
+            <summary>
+            Gets the list builder for the specified property.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.BuilderFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Gets the builder for the specified property.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.As``1">
+            <summary>
+            Casts this builder to the specified builder type.
+            </summary>
+            <typeparam name="TBuilderType">The type of the builder.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.op_Explicit(Fluency.FluentBuilder{`0})~`0">
+            <summary>
+            Performs an implicit conversion from <see cref="T:Fluency.FluentBuilder`1"/> to <see cref="!:T"/>.
+            This is so we don't have to explicitly call "build()" in the code.
+            </summary>
+            <param name="builder">The builder.</param>
+            <returns>The result of the conversion.</returns>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.GenerateNewId">
+            <summary>
+            Gets a unique id with a negative value so that it does not conflict with existing data in the database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.AliasFor(`0)">
+            <summary>
+            Overrides the build result with the specified object. If this is called, the builder will not perform the build, but will rather, return the prebuilt result.
+            </summary>
+            <param name="buildResult">
+            The build result.
+            </param>
+            <returns>
+            Builder that will return the specified result.
+            </returns>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.UsePreBuiltResult(`0)">
+            <summary>
+            Overrides the build result with the specified object. If this is called, the builder will not perform the build, but will rather, return the prebuilt result.
+            </summary>
+            <param name="buildResult">The build result.</param>
+        </member>
+        <member name="M:Fluency.FluentBuilder`1.GetDefaultValue(System.Reflection.PropertyInfo)">
+            <summary>
+            Gets the default value for a specified property.
+            </summary>
+            <param name="propertyInfo">The property info.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DynamicFluentBuilder`1.With``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},``0)">
+            <summary>
+            Specify the value of a property on the build result.<br/>
+            Usage: <code>builder.With( x => x.MyProperty, "value to assign" );</code>
+            </summary>
+            <example></example>
+            <typeparam name="TPropertyType">The type of the property to set. This is inferred.</typeparam>
+            <param name="propertyExpression">Lambda expression identifying the property to set.</param>
+            <param name="propertyValue">The property's value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DynamicFluentBuilder`1.With``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},Fluency.FluentBuilder{``0})">
+            <summary>
+            Specify a builder for the value of a property on the build result.<br/>
+            Usage: <code>builder.With( x => x.MyProperty, otherFluentBuilder );</code>
+            </summary>
+            <example></example>
+            <typeparam name="TPropertyType">The type of the property to set. This is inferred.</typeparam>
+            <param name="propertyExpression">Lambda expression identifying the property to set.</param>
+            <param name="propertyValueBuilder">The builder to use to build the property's value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DynamicFluentBuilder`1.Having``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},``0)">
+            <summary>
+            Specify the value of a property on the build result.<br/>
+            Usage: <code>builder.Having( x => x.MyProperty, "value to assign" );</code>
+            </summary>
+            <example></example>
+            <typeparam name="TPropertyType">The type of the property to set. This is inferred.</typeparam>
+            <param name="propertyExpression">Lambda expression identifying the property to set.</param>
+            <param name="propertyValue">The property's value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DynamicFluentBuilder`1.Having``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},Fluency.FluentBuilder{``0})">
+            <summary>
+            Specify a builder for the value of a property on the build result.<br/>
+            Usage: <code>builder.Having( x => x.MyProperty, otherFluentBuilder );</code>
+            </summary>
+            <example></example>
+            <typeparam name="TPropertyType">The type of the property to set. This is inferred.</typeparam>
+            <param name="propertyExpression">Lambda expression identifying the property to set.</param>
+            <param name="propertyValueBuilder">The builder to use to build the property's value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DynamicFluentBuilder`1.For``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},``0)">
+            <summary>
+            Specify the value of a property on the build result.<br/>
+            Usage: <code>builder.For( x => x.MyProperty, "value to assign" );</code>
+            </summary>
+            <example></example>
+            <typeparam name="TPropertyType">The type of the property to set. This is inferred.</typeparam>
+            <param name="propertyExpression">Lambda expression identifying the property to set.</param>
+            <param name="propertyValue">The property's value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DynamicFluentBuilder`1.For``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},Fluency.FluentBuilder{``0})">
+            <summary>
+            Specify a builder for the value of a property on the build result.<br/>
+            Usage: <code>builder.For( x => x.MyProperty, otherFluentBuilder );</code>
+            </summary>
+            <example></example>
+            <typeparam name="TPropertyType">The type of the property to set. This is inferred.</typeparam>
+            <param name="propertyExpression">Lambda expression identifying the property to set.</param>
+            <param name="propertyValueBuilder">The builder to use to build the property's value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DynamicFluentBuilder`1.WithListOf``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}},``0[])">
+            <summary>
+            Specify a builder for the value of a property on the build result.<br/>
+            Usage: <code>builder.For( x => x.MyProperty, otherFluentBuilder );</code>
+            </summary>
+            <example></example>
+            <typeparam name="TPropertyType">The type of the property to set. This is inferred.</typeparam>
+            <param name="propertyExpression">Lambda expression identifying the property to set.</param>
+            <param name="values">The values to add to the list</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DynamicFluentBuilder`1.WithListOf``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}},Fluency.FluentBuilder{``0}[])">
+            <summary>
+            Specify a builder for the value of a property on the build result.<br/>
+            Usage: <code>builder.For( x => x.MyProperty, otherFluentBuilder );</code>
+            </summary>
+            <example></example>
+            <typeparam name="TPropertyType">The type of the property to set. This is inferred.</typeparam>
+            <param name="propertyExpression">Lambda expression identifying the property to set.</param>
+            <param name="propertyBuilders">The builders for the values to add to the list</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DynamicFluentBuilder`1.HavingListOf``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}},``0[])">
+            <summary>
+            Specify a builder for the value of a property on the build result.<br/>
+            Usage: <code>builder.For( x => x.MyProperty, otherFluentBuilder );</code>
+            </summary>
+            <example></example>
+            <typeparam name="TPropertyType">The type of the property to set. This is inferred.</typeparam>
+            <param name="propertyExpression">Lambda expression identifying the property to set.</param>
+            <param name="values">The values to add to the list</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.DynamicFluentBuilder`1.HavingListOf``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}},Fluency.FluentBuilder{``0}[])">
+            <summary>
+            Specify a builder for the value of a property on the build result.<br/>
+            Usage: <code>builder.For( x => x.MyProperty, otherFluentBuilder );</code>
+            </summary>
+            <example></example>
+            <typeparam name="TPropertyType">The type of the property to set. This is inferred.</typeparam>
+            <param name="propertyExpression">Lambda expression identifying the property to set.</param>
+            <param name="propertyBuilders">The builders for the values to add to the list</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.NumericalExtensions.Of``1(System.Int32,System.Func{``0})">
+            <summary>
+            Repeats the given function the specified number of times returning 
+            an IEnumerable containing the specified count of return values.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="count">The count.</param>
+            <param name="func">The func.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Fluency.Initialize(System.Action{Fluency.InitializationExpression})">
+            <summary>
+            Initializes Fluency with the specified configuration.
+            </summary>
+            <param name="configurationAction">The configuration action.</param>
+        </member>
+        <member name="M:Fluency.FluencyConfiguration.GetIdGenerator``1">
+            <summary>
+            Gets the id generator for the specified type..
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluencyException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fluency.FluencyException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Fluency.IFluentListBuilder`1.Add(Fluency.IFluentBuilder{`0})">
+            <summary>
+            Adds a builder to build a specified item in the list.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Fluency.IFluentListBuilder`1.Add(`0)">
+            <summary>
+            Adds the specified  item directly to the list.
+            </summary>
+            <param name="directItem">The direct item.</param>
+        </member>
+        <member name="T:Fluency.IdGenerators.DecrementingIdGenerator">
+            <summary>
+            Generates Id values starting at a specific number, decrementing subsequent ids by 1.
+            </summary>
+        </member>
+        <member name="T:Fluency.IdGenerators.IIdGenerator">
+            <summary>
+            Gets the next Id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.IdGenerators.DecrementingIdGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fluency.IdGenerators.DecrementingIdGenerator"/> class. By default, the first Id value that will be used is -1.
+            </summary>
+        </member>
+        <member name="M:Fluency.IdGenerators.DecrementingIdGenerator.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fluency.IdGenerators.DecrementingIdGenerator"/> class providing the first value to use as an Id.
+            </summary>
+            <param name="startingValue">The first Id value that will be used.</param>
+        </member>
+        <member name="M:Fluency.IdGenerators.DecrementingIdGenerator.GetNextId">
+            <summary>
+            Gets the next Id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Fluency.IdGenerators.IncrementingIdGenerator">
+            <summary>
+            Generates Id values starting at a specific number, incrementing subsequent ids by 1.
+            </summary>
+        </member>
+        <member name="M:Fluency.IdGenerators.IncrementingIdGenerator.GetNextId">
+            <summary>
+            Gets the next Id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluentListBuilder`1.build">
+            <summary>
+            Builds a list of all the items specified directly combined with a list of all items built by the specifed builders.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.FluentListBuilder`1.Add(Fluency.IFluentBuilder{`0})">
+            <summary>
+            Adds a builder to build a specified item in the list.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Fluency.FluentListBuilder`1.Add(`0)">
+            <summary>
+            Adds the specified  item directly to the list.
+            </summary>
+            <param name="directItem">The direct item.</param>
+        </member>
+        <member name="M:Fluency.Probabilities.OutcomeSpecification`1.#ctor(System.Int32,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fluency.Probabilities.OutcomeSpecification`1"/> class.
+            </summary>
+            <param name="percentChance">The percent chance.</param>
+            <param name="outcome">The outcome.</param>
+            <exception cref="T:System.ArgumentException"><c>ArgumentException</c>.</exception>
+        </member>
+        <member name="M:Fluency.Probabilities.ProbabilitySpecification`1.PercentOutcome(System.Int32,`0)">
+            <summary>
+            Adds a new possible outcome specifying what the percent chance it is for that outcome.
+            </summary>
+            <param name="percentChance">The percent chance.</param>
+            <param name="outcome">The outcome.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"><c>ArgumentException</c>.</exception>
+        </member>
+        <member name="M:Fluency.Utils.EnumerableExtensions.each``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Perform the specified action on each item in the enumerable.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="items">The items.</param>
+            <param name="action">The action.</param>
+        </member>
+        <member name="M:Fluency.Utils.EnumerableExtensions.to(System.Int32,System.Int32)">
+            <summary>
+            Yields an <see cref="!:IEnumerable&lt;int&gt;"/>  containing the sequence of integers in the specified range.
+            </summary>
+            <param name="start">The start of the range.</param>
+            <param name="end">The end of the range.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.EnumerableExtensions.AddIfUnique``1(System.Collections.Generic.ICollection{``0},``0,System.Func{``0,System.Boolean})">
+            <summary>
+            Adds the specified item to the collection so long as no other object with the same identity exists.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list">The list to add to.</param>
+            <param name="itemToAdd">The item to add.</param>
+            <param name="hasSameIdentityAsItemToAdd">The predicate to use to determine if any list item has same identity as item to add.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.PropertyExpressionExtensions.GetPropertyInfo``2(System.Linq.Expressions.Expression{System.Func{``1,System.Collections.Generic.IList{``0}}})">
+            <summary>
+            Gets the property info for the specified expression targeting a generic list.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <typeparam name="T">The type of the class.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.PropertyExpressionExtensions.GetPropertyInfo``2(System.Linq.Expressions.Expression{System.Func{``1,``0}})">
+            <summary>
+            Gets the property info for the specified expression.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <typeparam name="T">The type of the class.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.ReflectionExtensions.GetPublicGetProperties(System.Type)">
+            <summary>
+            Gets the properties with a public getter.
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.ReflectionExtensions.GetPublicReadOnlyProperties(System.Type)">
+            <summary>
+            Gets the public read only properties.
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.ReflectionExtensions.PropertyInfoFor``2(``0,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets the property info for the property specified in the expression.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <param name="source">The source.</param>
+            <param name="propertyExpression">The property expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.ReflectionExtensions.SetProperty(System.Object,System.String,System.Object)">
+            <summary>
+            Sets the property by name on a given instance.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="propertyName">Name of the property.</param>
+            <param name="propertyValue">The property value.</param>
+        </member>
+        <member name="M:Fluency.Utils.ReflectionExtensions.SetProperty(System.Object,System.Reflection.PropertyInfo,System.Object)">
+            <summary>
+            Sets the property on a given instance specified by its PropertyInfo.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="propertyInfo">The property info.</param>
+            <param name="propertyValue">The property value.</param>
+        </member>
+        <member name="M:Fluency.Utils.ReflectionExtensions.InvokeMethod(System.Object,System.String,System.Object[])">
+            <summary>
+            Invokes a method on an objet given the method's name and a list of parameters.
+            </summary>
+            <param name="target">The target.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.ReflectionExtensions.ShallowClone``1(``0)">
+            <summary>
+            Builds a new object with values the builder has specified in the prototype.
+            </summary>
+            <param name="prototype">The prototype.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.ReflectionExtensions.SetProperty``2(``1,System.Linq.Expressions.Expression{System.Func{``1,``0}},``0)">
+            <summary>
+            Sets the value for the property specified by an expression.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <typeparam name="T"></typeparam>
+            <param name="prototype">The prototype.</param>
+            <param name="propertyExpression">The property expression.</param>
+            <param name="propertyValue">The property value.</param>
+        </member>
+        <member name="M:Fluency.Utils.ReflectionExtensions.GetProperty``2(``1,System.Linq.Expressions.Expression{System.Func{``1,``0}})">
+            <summary>
+            Gets the value for the property specified by an expression.
+            </summary>
+            <typeparam name="TPropertyType">The type of the property type.</typeparam>
+            <typeparam name="T"></typeparam>
+            <param name="prototype">The prototype.</param>
+            <param name="propertyExpression">The property expression.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fluency.IdGenerators.StaticValueIdGenerator">
+            <summary>
+            Generates all Ids as the same static value. Use zero for NHibernate classes since NHibernate creates the ids on its own.
+            </summary>
+        </member>
+        <member name="M:Fluency.IdGenerators.StaticValueIdGenerator.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fluency.IdGenerators.StaticValueIdGenerator"/> class.
+            </summary>
+            <param name="staticIdValue">The static id value.</param>
+        </member>
+        <member name="M:Fluency.IdGenerators.StaticValueIdGenerator.GetNextId">
+            <summary>
+            Gets the next Id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fluency.Utils.StringExtensions.format_using(System.String,System.Object[])">
+            <summary>
+            Extension for string.Format, since I always forget to type format till the end of the string.
+            </summary>
+            <param name="format">The format.</param>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

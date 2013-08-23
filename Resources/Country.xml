@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<country>
+  <id>21</id>
+  <iso2_code>BE</iso2_code>
+  <name_caps>BELGIUM</name_caps>
+  <name>Belgium</name>
+  <iso3_code>BEL</iso3_code>
+  <num_code>56</num_code>
+  <visible>1</visible>
+  <european>1</european>
+</country>

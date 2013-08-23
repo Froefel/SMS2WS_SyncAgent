@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<product>
+  <id>65379</id>
+  <product_type_id>1</product_type_id>
+  <author_id>3613</author_id>
+  <manufacturer_id>855</manufacturer_id>
+  <supplier_id>50</supplier_id>
+  <instrument_id>1927</instrument_id>
+  <available>1</available>
+  <name_nl>Pink Floyd - Bass - Autentic play along (Book + CD)</name_nl>
+  <subtitle_nl></subtitle_nl>
+  <description_nl></description_nl>
+  <title_tag_nl></title_tag_nl>
+  <meta_description_nl></meta_description_nl>
+  <meta_keywords_nl></meta_keywords_nl>
+  <ru_name_nl>pink-floyd-bass-autentic-play-along-book-cd-</ru_name_nl>
+  <keywords_nl></keywords_nl>
+  <sell_price>22</sell_price>
+  <reference>9780571526673</reference>
+  <isbn>0571526675</isbn>
+  <ismn></ismn>
+  <ean></ean>
+  <upc></upc>
+  <language_id></language_id>
+  <binding_id></binding_id>
+  <grade_level></grade_level>
+  <product_serie_id></product_serie_id>
+  <tax_rate_id>1</tax_rate_id>
+  <nr_of_pages></nr_of_pages>
+  <weight></weight>
+  <length></length>
+  <width></width>
+  <height></height>
+  <internal_stock_qty>2</internal_stock_qty>
+  <external_stock_qty>0</external_stock_qty>
+  <promotion>0</promotion>
+  <highlight_on_home>0</highlight_on_home>
+  <bestseller>0</bestseller>
+  <search_keywords></search_keywords>
+  <teacher_discount></teacher_discount>
+  <reseller_discount></reseller_discount>
+  <created>2007-04-07 00:00:01</created>
+  <updated>2012-12-14 01:49:59</updated>
+  <deleted></deleted>
+  <songs>
+    <song>
+      <id>44969</id>
+      <sort_order>1</sort_order>
+      <title>See Emily Play</title>
+      <author_id>3613</author_id>
+    </song>
+    <song>
+      <id>44970</id>
+      <sort_order>2</sort_order>
+      <title>Time</title>
+      <author_id>3613</author_id>
+    </song>
+    <song>
+      <id>44971</id>
+      <sort_order>3</sort_order>
+      <title>Money</title>
+      <author_id>3613</author_id>
+    </song>
+    <song>
+      <id>44972</id>
+      <sort_order>4</sort_order>
+      <title>Have A Cigar</title>
+      <author_id>3613</author_id>
+    </song>
+    <song>
+      <id>44973</id>
+      <sort_order>5</sort_order>
+      <title>Wish You Were Here</title>
+      <author_id>3613</author_id>
+    </song>
+    <song>
+      <id>44974</id>
+      <sort_order>6</sort_order>
+      <title>Another Brick In The Wall (part 2)</title>
+      <author_id>3613</author_id>
+    </song>
+    <song>
+      <id>44975</id>
+      <sort_order>7</sort_order>
+      <title>Young Lust</title>
+      <author_id>3613</author_id>
+    </song>
+    <song>
+      <id>44976</id>
+      <sort_order>8</sort_order>
+      <title>Comfortably Numb</title>
+      <author_id>3613</author_id>
+    </song>
+    <song>
+      <id>44977</id>
+      <sort_order>9</sort_order>
+      <title>The Fletcher Memorial Home</title>
+      <author_id>3613</author_id>
+    </song>
+  </songs>
+  <product_categories>
+    <product_category>
+      <id>1</id>
+    </product_category>
+  </product_categories>
+  <product_pictures>
+    <product_picture>65379.jpg</product_picture>
+  </product_pictures>
+</product>
