@@ -1,4 +1,7 @@
-just a test change
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4987.22151 on 2013/08/27 (Production version, deployed on server)
+#130826_01 - added support for SyncResultNew, which tracks how many new objects were created per object per session
 
 ----------------------------------------------------------------------------------------------------------------------
 	   ==> Created version 1.0.4983.1417 on 2013/08/22 (Production version, deployed on server)

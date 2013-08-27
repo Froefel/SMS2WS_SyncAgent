@@ -10,6 +10,12 @@ namespace SMS2WS_SyncAgent
 
         public static void WriteResult(int sessionId, Enums.UpdateActions action, int resultSuccess, int resultFailed)
         {
+            WriteResult(sessionId, action, resultSuccess, resultFailed, null);
+
+        }
+
+        public static void WriteResult(int sessionId, Enums.UpdateActions action, int resultSuccess, int resultFailed, int? resultNew)
+        {
             //check if anything needs to be logged
             if (resultSuccess + resultFailed == 0)
                 return;
@@ -27,7 +33,8 @@ namespace SMS2WS_SyncAgent
                                       "[Timestamp], " +
                                       "SyncAction, " +
                                       "SyncResultSuccess, " +
-                                      "SyncResultFailed" +
+                                      "SyncResultFailed, " +
+                                      "SyncResultNew" +
                                       ") " +
                                       "values " +
                                       "(" +
@@ -35,13 +42,15 @@ namespace SMS2WS_SyncAgent
                                       "@timestamp, " +
                                       "@sync_action, " +
                                       "@sync_result_success, " +
-                                      "@sync_result_failed" +
+                                      "@sync_result_failed, " +
+                                      "@sync_result_new" +
                                       ")";
                     cmd.Parameters.AddWithValue("@sync_session_id", sessionId);
                     cmd.Parameters.AddWithValue("@timestamp", DateTime.Parse(DateTime.Now.ToString()));
                     cmd.Parameters.AddWithValue("@sync_action", action.ToString());
                     cmd.Parameters.AddWithValue("@sync_result_success", resultSuccess);
                     cmd.Parameters.AddWithValue("@sync_result_failed", resultFailed);
+                    cmd.Parameters.AddWithValue("@sync_result_new", resultNew != 0 ? resultNew ?? (object)DBNull.Value : DBNull.Value);
                     cmd.ExecuteNonQuery();
                 }
             }

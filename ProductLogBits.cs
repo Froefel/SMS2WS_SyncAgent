@@ -44,7 +44,7 @@ namespace SMS2WS_SyncAgent
         /// <summary>
         /// Gets the value of a specific bit
         /// </summary>
-        /// <param name="position">Position of the bit to be set</param>
+        /// <param name="position">Position of the bit to be tested</param>
         /// <returns></returns>
         public bool BitTest(Enums.Logfield position)
         {

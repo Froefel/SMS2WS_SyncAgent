@@ -1345,6 +1345,7 @@ namespace SMS2WS_SyncAgent
             string actionVerbContinuousTense = "";
             int cntSuccess = 0;
             int cntFail = 0;
+            int cntNew = 0;
 
             try    //method-level exception handling
             {
@@ -1416,6 +1417,8 @@ namespace SMS2WS_SyncAgent
                                         product.SetSyncStatus(true, dictLogIds);
                                         cntProductsAffected++;
                                         cntSuccess++;
+                                        if (product.ActiveInWebshop && product.LogBits.BitTest(Enums.Logfield.ActiveInWebshop))
+                                            cntNew++;
 
                                         msg = String.Format("Product {0} in webshop: {1}", actionVerbPastTense, product.Id.ToString("D6"));
                                         this.Out.WriteLine(msg);
@@ -1479,7 +1482,7 @@ namespace SMS2WS_SyncAgent
             }
             finally
             {
-                SyncSessionLogger.WriteResult(sessionId, action, cntSuccess, cntFail);
+                SyncSessionLogger.WriteResult(sessionId, action, cntSuccess, cntFail, cntNew);
             }
 
             return errorOccurred;
