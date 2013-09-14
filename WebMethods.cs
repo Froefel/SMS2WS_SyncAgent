@@ -28,6 +28,8 @@ namespace SMS2WS_SyncAgent
             string result = HttpUtility.HtmlDecode(wc.DownloadString(uri));
             wc.Dispose();
 
+            log.Debug(uri);
+            log.Debug(result);
             return PreprocessWebMethodResult(result);
         }
 
@@ -46,6 +48,7 @@ namespace SMS2WS_SyncAgent
         /// <param name="targetObject">The object name used in the QueryString</param>
         /// <param name="method">The method name used in the QueryString</param>
         /// <param name="arguments">Arguments for the function used in the QueryString. The arguments are in the form "&[name]=[value]"</param>
+        /// <param name="data">Data to be sent (Xml document)</param>
         /// <returns>A valid Xml string as returned by the web method</returns>
         private static string SendDataThroughWebMethod(string targetObject, string method, string arguments, string data)
         {
@@ -55,6 +58,8 @@ namespace SMS2WS_SyncAgent
 
             try
             {
+                log.Debug(uri);
+                log.Debug(data);
                 var wc = AuthenticatedWebClient();
                 var formData = new NameValueCollection();
                 formData["data"] = data;

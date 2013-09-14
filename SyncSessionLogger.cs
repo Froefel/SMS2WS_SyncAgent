@@ -10,11 +10,11 @@ namespace SMS2WS_SyncAgent
 
         public static void WriteResult(int sessionId, Enums.UpdateActions action, int resultSuccess, int resultFailed)
         {
-            WriteResult(sessionId, action, resultSuccess, resultFailed, null);
+            WriteResult(sessionId, action, resultSuccess, resultFailed, null, null);
 
         }
 
-        public static void WriteResult(int sessionId, Enums.UpdateActions action, int resultSuccess, int resultFailed, int? resultNew)
+        public static void WriteResult(int sessionId, Enums.UpdateActions action, int resultSuccess, int resultFailed, int? resultNew, Enums.ProductType? productType)
         {
             //check if anything needs to be logged
             if (resultSuccess + resultFailed == 0)
@@ -34,7 +34,8 @@ namespace SMS2WS_SyncAgent
                                       "SyncAction, " +
                                       "SyncResultSuccess, " +
                                       "SyncResultFailed, " +
-                                      "SyncResultNew" +
+                                      "SyncResultNew, " +
+                                      "ProductType" +
                                       ") " +
                                       "values " +
                                       "(" +
@@ -43,7 +44,8 @@ namespace SMS2WS_SyncAgent
                                       "@sync_action, " +
                                       "@sync_result_success, " +
                                       "@sync_result_failed, " +
-                                      "@sync_result_new" +
+                                      "@sync_result_new, " +
+                                      "@product_type" +
                                       ")";
                     cmd.Parameters.AddWithValue("@sync_session_id", sessionId);
                     cmd.Parameters.AddWithValue("@timestamp", DateTime.Parse(DateTime.Now.ToString()));
@@ -51,12 +53,13 @@ namespace SMS2WS_SyncAgent
                     cmd.Parameters.AddWithValue("@sync_result_success", resultSuccess);
                     cmd.Parameters.AddWithValue("@sync_result_failed", resultFailed);
                     cmd.Parameters.AddWithValue("@sync_result_new", resultNew != 0 ? resultNew ?? (object)DBNull.Value : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@product_type", productType != null ? (int)productType : (object)DBNull.Value);
                     cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception exception)
             {
-                log.Error(Utility.GetExceptionWithMethodSignatureDetails(MethodBase.GetCurrentMethod(), exception, action, resultSuccess, resultFailed));
+                log.Error(Utility.GetExceptionWithMethodSignatureDetails(MethodBase.GetCurrentMethod(), exception, action, resultSuccess, resultFailed, resultNew, productType));
                 throw;
             }
         }

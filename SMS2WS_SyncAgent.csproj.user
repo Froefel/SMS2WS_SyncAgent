@@ -12,7 +12,7 @@
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <StartArguments>-t "2013-08-22 19:42:16" -tc "2013-08-22 19:42:16"</StartArguments>
+    <StartArguments>-t "2013-09-10 22:44:00"</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <StartArguments>

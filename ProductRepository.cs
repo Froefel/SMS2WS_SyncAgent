@@ -395,7 +395,7 @@ namespace SMS2WS_SyncAgent
                             consolidatedLogBits.BitSet(Enums.Logfield.HighlightOnHome, true);
                         }
 
-                        product.ActiveInWebshop = reader.GetBoolean(reader.GetOrdinal("ActiveInWebshop"));
+                        product.ActiveInWebshop = reader.GetBoolean(reader.GetOrdinal("ActiveInWebshop"));   //we always set this value so we can later optimize the product pictures to be uploaded
                         if (logBits.BitTest(Enums.Logfield.ActiveInWebshop))
                         {
                             consolidatedLogBits.BitSet(Enums.Logfield.ActiveInWebshop, true);
@@ -931,7 +931,7 @@ namespace SMS2WS_SyncAgent
         /// <returns>Returns a Song object populated with data</returns>
         internal static Song LoadSongFromXml(string xmlString)
         {
-            Song song = new Song();
+            var song = new Song();
             XElement xml = XElement.Parse(xmlString);
 
             if (!Utility.XmlElementIsEmptyOrSpecialValue(xml.Element("id")))

@@ -58,10 +58,11 @@ namespace SMS2WS_SyncAgent
 
 
         /// <summary>
-        /// Check if a customer with a given Id exists in the DB
+        /// Check if a customer with a given StoreId or WebshopId exists in the DB
         /// </summary>
-        /// <param name="customerStoreId">Id of the customer to be checked</param>
-        internal static bool CustomerExists(int customerStoreId)
+        /// <param name="customerStoreId">StoreId of the customer to be checked</param>
+        /// <param name="customerWebshopId">WebshopId of the customer to be checked</param>
+        internal static bool CustomerExists(int? customerStoreId, int? customerWebshopId)
         {
             bool result = false;
 
@@ -70,13 +71,28 @@ namespace SMS2WS_SyncAgent
                 //create and open connection
                 using (OleDbConnection conn = DAL.GetConnection())
                 {
-                    //create command
-                    OleDbCommand cmd = conn.CreateCommand();
-                    cmd.CommandText = "select count(*) from Klanten where KlantID = @storeId";
-                    cmd.Parameters.AddWithValue("@storeId", customerStoreId);
+                    if (customerStoreId != null)
+                    {
+                        //create command
+                        OleDbCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = "select count(*) from Klanten where KlantID = @storeId";
+                        cmd.Parameters.AddWithValue("@storeId", customerStoreId);
 
-                    //execute command
-                    result = cmd.ExecuteScalar().Equals(1);
+                        //execute command
+                        result = cmd.ExecuteScalar().Equals(1);
+                    }
+
+                    if (result == false && customerWebshopId != null)
+                    {
+                        //create command
+                        OleDbCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = "select count(*) from Klanten where KlantID_WS = @webshopId and DeleteDttm is null";
+                        cmd.Parameters.AddWithValue("@webshopId", customerWebshopId);
+
+                        //execute command
+                        int rows = (int)cmd.ExecuteScalar();
+                        result = rows >= 1;
+                    }
                 }
             }
             catch (OleDbException exception)
@@ -104,11 +120,12 @@ namespace SMS2WS_SyncAgent
                 {
                     //create command
                     OleDbCommand cmd = conn.CreateCommand();
-                    cmd.CommandText = "select count(*) from Klanten where Email = @email";
+                    cmd.CommandText = "select count(*) from Klanten where Email = @email and DeleteDttm is null";
                     cmd.Parameters.AddWithValue("@email", emailAddress);
 
                     //execute command
-                    result = cmd.ExecuteScalar().Equals(1);
+                    int rows = (int)cmd.ExecuteScalar();
+                    result = rows >= 1;
                 }
             }
             catch (OleDbException exception)
@@ -121,8 +138,8 @@ namespace SMS2WS_SyncAgent
         }
 
 
-        internal static bool CustomerEmailCanBeUsedAsLogin(string emailAddress)
-        {
+        internal static bool EmailCanBeUsedAsLoginForCustomer(string emailAddress, int customerId)
+            {
             bool result;
 
             try
@@ -133,11 +150,12 @@ namespace SMS2WS_SyncAgent
                     //create command
                     OleDbCommand cmd = conn.CreateCommand();
                     cmd.CommandText = "select count(*) from Klanten " +
-                                      "where Email = @email and DeleteDttm Is Null";
+                                      "where Email = @email and KlantID <> @customerId and EmailIsWSLogin = true and DeleteDttm Is Null";
                     cmd.Parameters.AddWithValue("@email", emailAddress);
+                    cmd.Parameters.AddWithValue("@customerId", customerId);
 
                     //execute command
-                    result = cmd.ExecuteScalar().Equals(1);
+                    result = cmd.ExecuteScalar().Equals(0);
                 }
             }
             catch (OleDbException exception)
@@ -147,6 +165,51 @@ namespace SMS2WS_SyncAgent
             }
 
             return result;
+        }
+
+
+        /// <summary>
+        /// Returns a Customer object from the database
+        /// </summary>
+        /// <param name="customerStoreId">WebshopId of the customer to be retrieved</param>
+        /// <returns>Returns a Customer object populated with data</returns>
+        internal static Customer GetActiveCustomerByWebshopId(int webshopId)
+        {
+            Customer customer = null;
+
+            try
+            {
+                //create and open connection
+                using (OleDbConnection conn = DAL.GetConnection())
+                {
+                    //create command
+                    OleDbCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = "select * from Klanten where KlantID_WS = @webshopId and DeleteDttm is null order by EmailIsWSLogin";
+                    cmd.Parameters.AddWithValue("@webshopId", webshopId);
+
+                    try
+                    {
+                        //execute a datareader, closing the connection when all the data is read from it
+                        using (OleDbDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            List<Customer> customers = LoadCustomerListFromDataReader(dr);
+                            if (customers.Count >= 1)
+                                customer = customers[0];
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw new Exception("Error while executing the following Sql statement:\n" + cmd.ToStringExtended(), exception);
+                    }
+                }
+            }
+            catch (OleDbException exception)
+            {
+                log.Error(Utility.GetExceptionWithMethodSignatureDetails(MethodBase.GetCurrentMethod(), exception, webshopId));
+                throw;
+            }
+
+            return customer;
         }
 
 
@@ -162,7 +225,7 @@ namespace SMS2WS_SyncAgent
 
             try
             {
-                customerExists = customer.StoreId != null && CustomerExists((int) customer.StoreId);
+                customerExists = CustomerExists(customer.StoreId, customer.WebshopId);
 
                 //create and open connection
                 using (OleDbConnection conn = DAL.GetConnection())
@@ -209,8 +272,14 @@ namespace SMS2WS_SyncAgent
                               "UpdateDttm = @lastUpdateDttm, " +
                               "Naam4Sort = @name4Sort, " +
                               "Fullname = @fullName, " +
-                              "Test = @test " +
-                              "where KlantID = @storeId";
+                              "Test = @test ";
+                        if (customer.StoreId == null)
+                        {
+                            sql += ", SyncWS = null ";             //clear SyncWS value because at least the StoreId will be updated, which needs to be synched again to WS on the next pass
+                            customer.UpdatedDttm = DateTime.Now;   //set UpdateDttm because at least the StoreId will be updated, which needs to be synched again to WS on the next pass
+                        }
+                        sql += "where " + (customer.StoreId != null ? "KlantID = @storeId" : "KlantID_WS = @webshopId");
+
                     }
                     else
                     {
@@ -254,14 +323,15 @@ namespace SMS2WS_SyncAgent
                               "@teacherCardValidTo, " +
                               "@teacherRegistrationNote, " +
                               "@teacherConfirmed, " +
-                              "@lastUpdateDttm, " +
                               "@lastLoginDttm, " +
+                              "@lastUpdateDttm, " +
                               "@name4Sort, " +
                               "@fullName, " +
                               "@test" +
                               ")";
                         customerStoreId = Utility.GetLastPrimaryKeyValueInTable<int>("Klanten", "KlantID") + 1;
                         cmd.Parameters.AddWithValue("@storeId", customerStoreId);
+                        customer.UpdatedDttm = DateTime.Now;    //set UpdateDttm because at least the StoreId will be updated, which needs to be synched again to WS on the next pass
                     }
 
                     cmd.CommandText = sql;
@@ -277,7 +347,7 @@ namespace SMS2WS_SyncAgent
                     cmd.Parameters.AddWithValue("@phone", customer.Phone ?? (object) DBNull.Value);
                     cmd.Parameters.AddWithValue("@mobile", customer.Mobile ?? (object) DBNull.Value);
                     cmd.Parameters.AddWithValue("@email", customer.Email ?? (object) DBNull.Value);
-                    cmd.Parameters.AddWithValue("@emailIsWSLogin", customer.Email != null && CustomerEmailCanBeUsedAsLogin(customer.Email));
+                    cmd.Parameters.AddWithValue("@emailIsWSLogin", customer.Email != null && EmailCanBeUsedAsLoginForCustomer(customer.Email, customer.StoreId ?? 0));
                     cmd.Parameters.AddWithValue("@billingName", customer.BillingName ?? (object) DBNull.Value);
                     cmd.Parameters.AddWithValue("@billingContact", customer.BillingContact ?? (object) DBNull.Value);
                     cmd.Parameters.AddWithValue("@billingAddress1", customer.BillingAddress1 ?? (object) DBNull.Value);
@@ -301,14 +371,16 @@ namespace SMS2WS_SyncAgent
                     cmd.Parameters.AddWithValue("@fullName", customer.FullName ?? (object) DBNull.Value);
                     cmd.Parameters.AddWithValue("@test", customer.Test);
 
-                    if (customerExists)
+                    if (customerExists && customer.StoreId != null)
                         cmd.Parameters.AddWithValue("@storeId", customer.StoreId);
 
                     cmd.ExecuteNonQuery();
 
                     if (!customerExists)
                         customer.StoreId = customerStoreId;
-                    
+                    else if (customerExists && customer.StoreId == null && customer.WebshopId != null)
+                        customer.StoreId = GetActiveCustomerByWebshopId((int)customer.WebshopId).StoreId;
+
                     return true;
                 }
             }
@@ -351,14 +423,16 @@ namespace SMS2WS_SyncAgent
             switch (action)
             {
                 case Enums.UpdateActions.customer_SMS2WS_update:
-                    sqlWhere = "SyncWS Is Null " +
+                    sqlWhere = "(SyncWS Is Null " +
+                               "or UpdateDttm > SyncWS) " +
                                "and Email Is Not Null " +
                                "and ((CreateDttm between @timestampStart and @timestampEnd) or " +
                                "(UpdateDttm between @timestampStart and @timestampEnd)) ";
                     break;
 
                 case Enums.UpdateActions.customer_SMS2WS_delete:
-                    sqlWhere = "SyncWS Is Null " +
+                    sqlWhere = "(SyncWS Is Null " +
+                               "or UpdateDttm > SyncWS) " +
                                "and Email Is Not Null " +
                                "and (DeleteDttm between @timestampStart and @timestampEnd) ";
                     break;

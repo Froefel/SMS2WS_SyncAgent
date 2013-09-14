@@ -527,7 +527,7 @@ namespace SMS2WS_SyncAgent
         /// Returns a System.String containing an Xml representation of the specified property of the current object
         /// </summary>
         /// <param name="property">name of a specific property that is to be written out as Xml. 
-        /// If this value is filled in, only the <id> node and the node for property are output.
+        /// If this value is filled in, only the <id/> node and the node for property are output.
         /// At the time of this writing, this is only used for product_pictures.
         /// </param>
         /// <returns></returns>

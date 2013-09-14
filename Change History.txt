@@ -1,5 +1,32 @@
 
 ----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.5004.35418 on 2013/09/13 (Production version, deployed on server)
+#130913_02 - CustomerRepository: changed method EmailCanBeUsedAsLoginForCustomer()
+#130913_01 - CustomerRepository.UpdateCustomer(): fixed Update sql statement that caused LastLoginDttm to be erroneously filled in. 
+												  The cause was that the @lastUpdateDttm and @lastLoginDttm parameters were reversed. The order is crucial for MS-Access.
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.5002.23022 on 2013/09/11 (Production version, deployed on server)
+#130911_01 - updated LoadProductListFromDataReader() such that the ActiveInWebshop flag is always read, regardless of whether the LogBits flag is set.
+			 This is necessary for the product pictures optimization code further down, which removes pictures if ActiveInWebshop=false.
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.5001.35305 on 2013/09/10 (Production version, deployed on server)
+#130910_02 - GetDataFromWebMethod() and SendDataThroughWebMethod(): added extra code such that XML of incoming and outgoing web calls is logged
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.5001.27598 on 2013/09/10 (Production version, deployed on server)
+#130910_01 - changed query that pulls updated customers from SMS, so it also pulls customers that have been updated AFTER the SyncWS timestamp
+		   - changed UpdateCustomer() such that existing cutomer can be found either by storeId or webshopId. This should avoid the duplicates we've seen thus far.
+#130906_01 - (PROD) changed rolling file appender definition in .config file so a new file is created daily.
+
+----------------------------------------------------------------------------------------------------------------------
+	   ==> Created version 1.0.4993.1039 on 2013/09/02 (Production version, deployed on server)
+#130901_01 - fixed error in LoadProductListFromDataReader() where ActiveInWebshop was not being assigned based on the BitLog setting, causing many product updates to be reported erroneously as new.
+		   - AppEngine.SynchronizeProducts(): separated log reporting into 6 and 21
+		   - TODO in PROD: add column [SyncAgentSessionResults].ProductType (done in PROD on 01/09/13)
+
+----------------------------------------------------------------------------------------------------------------------
 	   ==> Created version 1.0.4987.22151 on 2013/08/27 (Production version, deployed on server)
 #130826_01 - added support for SyncResultNew, which tracks how many new objects were created per object per session
 

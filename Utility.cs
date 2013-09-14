@@ -25,7 +25,7 @@ namespace SMS2WS_SyncAgent
         {
             Image img = Image.FromFile(filePath);
             byte[] arr;
-            using (MemoryStream ms = new MemoryStream())
+            using (var ms = new MemoryStream())
             {
                 img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                 arr = ms.ToArray();
@@ -401,12 +401,10 @@ namespace SMS2WS_SyncAgent
 
         internal static string GetExceptionWithMethodSignatureDetails(MethodBase method, Exception ex, params object[] values)
         {
-            string result;
-
             ParameterInfo[] parms = method.GetParameters();
             object[] namevalues = new object[2*parms.Length];
 
-            result = "Error in " + method.Name + "(";
+            string result = "Error in " + method.Name + "(";
             for (int i = 0, j = 0; i < parms.Length; i++, j += 2)
             {
                 result += "{" + j + "}={" + (j + 1) + "}, ";
@@ -422,8 +420,6 @@ namespace SMS2WS_SyncAgent
 
         internal static void UpdatePresence(string message)
         {
-            string sql;
-
             using (OleDbConnection conn = DAL.GetConnection())
             {
                 if (conn != null)
@@ -431,9 +427,9 @@ namespace SMS2WS_SyncAgent
                     //create command
                     var cmd = conn.CreateCommand();
 
-                    sql = "update Settings_Shared " +
-                          "set Waarde = @value " +
-                          "where Description = @key";
+                    string sql = "update Settings_Shared " +
+                                 "set Waarde = @value " +
+                                 "where Description = @key";
                     cmd.Parameters.AddWithValue("@value", AppSettings.ApplicationVersion + ", " +
                                                           DateTime.Now.ToString() + ", " +
                                                           message);

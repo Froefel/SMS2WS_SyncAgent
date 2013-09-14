@@ -51,7 +51,6 @@ namespace SMS2WS_SyncAgent
             {
                 if (conn != null)
                 {
-                    DateTime timestampStart;
                     DateTime timestampNow = DateTime.Now;
                     sessionId = SyncSessionLogger.GetNextSessionId();
 
@@ -68,7 +67,8 @@ namespace SMS2WS_SyncAgent
                         {
                             log.InfoFormat("Processing {0}...", action.ToString());
                             this.Out.WriteLine("Processing {0}...", action.ToString());
-                            
+
+                            DateTime timestampStart;
                             switch (action)
                             {
                                 case Enums.UpdateActions.customer_WS2SMS_update:
@@ -135,7 +135,6 @@ namespace SMS2WS_SyncAgent
         private List<string> GetUpdateActionDependencies(string argumentValue)
         {
             var result = new List<string>();
-            string sql;
 
             using (OleDbConnection conn = DAL.GetConnection())
             {
@@ -144,6 +143,7 @@ namespace SMS2WS_SyncAgent
                     //create command
                     var cmd = conn.CreateCommand();
 
+                    string sql;
                     if (argumentValue.Length > 0)
                     {
                         sql = "select id, name " +
@@ -280,7 +280,6 @@ namespace SMS2WS_SyncAgent
 
         private string GetSharedSettingFromSMS(string key)
         {
-            string sql;
             string value = "";
 
             try
@@ -292,9 +291,9 @@ namespace SMS2WS_SyncAgent
                         //create command
                         var cmd = conn.CreateCommand();
 
-                        sql = "select Waarde " +
-                              "from Settings_Shared " +
-                              "where Description = @key";
+                        string sql = "select Waarde " +
+                                     "from Settings_Shared " +
+                                     "where Description = @key";
                         cmd.Parameters.AddWithValue("@key", key);
 
                         cmd.CommandText = sql;
@@ -1343,9 +1342,12 @@ namespace SMS2WS_SyncAgent
             var dictLogIds = new Dictionary<int, string>();
             string actionVerbPastTense = "";
             string actionVerbContinuousTense = "";
-            int cntSuccess = 0;
-            int cntFail = 0;
-            int cntNew = 0;
+            int cntSuccess6 = 0;
+            int cntFail6 = 0;
+            int cntNew6 = 0;
+            int cntSuccess21 = 0;
+            int cntFail21 = 0;
+            int cntNew21 = 0;
 
             try    //method-level exception handling
             {
@@ -1384,7 +1386,6 @@ namespace SMS2WS_SyncAgent
                                 
                                 case Enums.UpdateActions.product_update:
                                     //first upload pictures
-                                    bool uploadStatus = false;
                                     if (product.ProductPictures.Count > 0)
                                     {
                                         List<ProductPicture> productPicturesToBeUploaded = (from pic in product.ProductPictures
@@ -1394,7 +1395,7 @@ namespace SMS2WS_SyncAgent
 
                                         if (productPicturesToBeUploaded.Count > 0)
                                         {
-                                            uploadStatus = Ftp.UploadProductPictures(productPicturesToBeUploaded);
+                                            bool uploadStatus = Ftp.UploadProductPictures(productPicturesToBeUploaded);
                                             //if anything went wrong while uploading the product pictures, skip updating this product
                                             if (!uploadStatus)
                                             {
@@ -1416,9 +1417,9 @@ namespace SMS2WS_SyncAgent
                                     case "ok":
                                         product.SetSyncStatus(true, dictLogIds);
                                         cntProductsAffected++;
-                                        cntSuccess++;
+                                        if (product.ProductTypeId == Enums.ProductType.Book) cntSuccess6++; else cntSuccess21++;
                                         if (product.ActiveInWebshop && product.LogBits.BitTest(Enums.Logfield.ActiveInWebshop))
-                                            cntNew++;
+                                            if (product.ProductTypeId == Enums.ProductType.Book) cntNew6++; else cntNew21++;
 
                                         msg = String.Format("Product {0} in webshop: {1}", actionVerbPastTense, product.Id.ToString("D6"));
                                         this.Out.WriteLine(msg);
@@ -1427,7 +1428,7 @@ namespace SMS2WS_SyncAgent
                                         break;
 
                                     case "error: unknown_product":
-                                        cntFail++;
+                                        if (product.ProductTypeId == Enums.ProductType.Book) cntFail6++; else cntFail21++;
                                         msg = String.Format("Product to be {0} not found in webshop: {1}", actionVerbPastTense, product.Id.ToString("D6"));
                                         this.Out.WriteLine(msg);
                                         log.Info(msg);
@@ -1443,21 +1444,21 @@ namespace SMS2WS_SyncAgent
                                         break;
 
                                     default:
-                                        cntFail++;
+                                        if (product.ProductTypeId == Enums.ProductType.Book) cntFail6++; else cntFail21++;
                                         msg = String.Format("Product could not be {0} in webshop: {1} : {2}", actionVerbPastTense, product.Id.ToString("D6"), result);
                                         throw new Exception(msg);
                                 }
                             }
                             else
                             {
-                                cntFail++;
+                                if (product.ProductTypeId == Enums.ProductType.Book) cntFail6++; else cntFail21++;
                                 msg = String.Format("Product could not be {0} in webshop: {1} : {2}", actionVerbPastTense, product.Id.ToString("D6"), result);
                                 throw new Exception(msg);
                             }
                         }
                         catch (Exception exception)
                         {
-                            cntFail++;
+                            if (product.ProductTypeId == Enums.ProductType.Book) cntFail6++; else cntFail21++;
                             errorOccurred = true;
                             msg = msg.Length > 0 ? exception.ToString() : String.Format("Error while {0} product in webshop: {1} : {2}", 
                                                                                         actionVerbContinuousTense, 
@@ -1482,7 +1483,8 @@ namespace SMS2WS_SyncAgent
             }
             finally
             {
-                SyncSessionLogger.WriteResult(sessionId, action, cntSuccess, cntFail, cntNew);
+                SyncSessionLogger.WriteResult(sessionId, action, cntSuccess6, cntFail6, cntNew6, Enums.ProductType.Book);
+                SyncSessionLogger.WriteResult(sessionId, action, cntSuccess21, cntFail21, cntNew21, Enums.ProductType.NonBook);
             }
 
             return errorOccurred;
